@@ -1,0 +1,28 @@
+---
+# tasks file for fedora_user_add
+#
+
+# Add bgsmith account to mimic RPi4 machines
+  - name: Add bgsmith
+    ansible.builtin.user:
+      name: bgsmith
+      comment: Brad Smith
+      groups: wheel
+
+  - name: Add ssh key
+    ansible.posix.authorized_key:
+      user: "{{ ua_user_id }}"
+      state: present
+      key: "{{ lookup('file', '/home/' + ua_user_id + '/.ssh/' + ua_pub_key) }}"
+
+  - name: Add sudoers file
+    ansible.builtin.template:
+      src: nopasswd.j2
+      dest: "/etc/sudoers.d/{{ ua_user_id }}-nopasswd"
+      owner: root
+      group: root
+      mode: ug+r,o=
+      validate: /usr/sbin/visudo -csf %s
+    when: ua_sudoer
+
+...

@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include fedora_user_add"
+      include_role:
+        name: "fedora_user_add"

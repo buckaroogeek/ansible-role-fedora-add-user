@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Brad Smith
+  description: Adds user profile to vm/physical fedora machine
+  company: SageCreek Software
+
+  license: license (BSD)
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Fedora
+      versions:
+  #   - 33
+
+  galaxy_tags:
+    - fedora
+
+dependencies: []
+...
